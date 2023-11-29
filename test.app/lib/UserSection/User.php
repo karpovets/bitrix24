@@ -11,7 +11,6 @@ class User
     public static function getUserNameVowels(int $userId): string
     {
         $userData =  '';
-        $vowels = "AEIOUY";
 
         if ($userId > 0)
         {
