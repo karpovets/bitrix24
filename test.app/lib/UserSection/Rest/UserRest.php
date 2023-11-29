@@ -3,6 +3,7 @@
 namespace Test\App\UserSection\Rest;
 
 use Test\App\UserSection\User;
+use Bitrix\Rest\RestException;
 
 class UserRest
 {
@@ -22,17 +23,22 @@ class UserRest
     {
         $userData = [];
 
-        if($query['error'])
-        {
-            throw new \Bitrix\Rest\RestException(
-                'Message',
+        if (!$query['id']) {
+            throw new RestException(
+                'id is not defined or invalid',
                 'ERROR_CODE',
-                \CRestServer::STATUS_PAYMENT_REQUIRED
+                \CRestServer::STATUS_WRONG_REQUEST
             );
         }
 
-        if ($query['id']) {
-            $userData = User::getUserNameVowels((int)$query['id']);
+        $userData = User::getUserNameVowels((int)$query['id']);
+
+        if (empty($userData)) {
+            throw new RestException(
+                'Not found',
+                'ERROR_CODE',
+                \CRestServer::STATUS_WRONG_REQUEST
+            );
         }
 
         return $userData;
