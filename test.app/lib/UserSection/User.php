@@ -15,8 +15,9 @@ class User
         if ($userId > 0)
         {
             $params = [
-                'filter' => ['=ID' => $userId],
-                'select' => ['ID', 'NAME', 'LAST_NAME', 'SECOND_NAME']
+                'filter' => ['=ID' => $userId, 'ACTIVE'=> 'Y'],
+                'select' => ['ID', 'NAME', 'LAST_NAME', 'SECOND_NAME'],
+                'cache' => ['ttl' => 3600]
             ];
 
             if ($user = \Bitrix\Main\UserTable::getRow($params))

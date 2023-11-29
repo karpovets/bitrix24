@@ -1,11 +1,7 @@
 <?php
 
 use Bitrix\Main\Localization\Loc;
-use Bitrix\Main\Application,
-    Bitrix\Main\Loader;
-use Bitrix\Main\EventManager,
-    Bitrix\Main\ModuleManager;
-
+use Bitrix\Main\EventManager;
 
 Loc::loadMessages(__FILE__);
 
